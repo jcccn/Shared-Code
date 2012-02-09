@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="welcome_string">Click buttons to test different functions.
+        The main idea is that deleting shared_pref files did not clear the pref data,
+      	which means that even if you restart the application, 
+      	you maybe still get the old should-be-deleted key-value pairs.	</string>
+    <string name="app_name">TestSharedPrefs</string>
+    <string name="button_title1">Refresh</string>
+    <string name="button_title2">Put Pref</string>
+    <string name="button_title3">Clear Pref</string>
+    <string name="button_title4">Del Pref File</string>
+    <string name="button_title5">Clear and Del</string>
+    <string name="button_title6">Quit</string>
+    <string name="button_title7">Quit Complete</string>
+
+</resources>

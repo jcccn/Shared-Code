@@ -94,8 +94,10 @@ public class HomeActivity extends Activity implements OnClickListener {
 		
 		File file = new File("/data/data/com.senseforce.testSharedPrefs/shared_prefs");
 		displayString = displayString + "\nExisting files:\n";
-		for (File item : file.listFiles()) {
-			displayString = displayString + item.getAbsolutePath() + "\n";
+		if (file.listFiles() != null) {
+			for (File item : file.listFiles()) {
+				displayString = displayString + item.getAbsolutePath() + "\n";
+			}
 		}
 		
 		((TextView)this.findViewById(R.id.displayTextView)).setText(displayString);

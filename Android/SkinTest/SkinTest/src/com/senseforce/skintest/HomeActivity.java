@@ -13,7 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -23,6 +23,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.senseforce.skintest.utils.ZipUtil;
 
 public class HomeActivity extends Activity implements OnClickListener {
 	/** Called when the activity is first created. */
@@ -38,6 +41,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 
 		findViewById(R.id.button_theme_1).setOnClickListener(this);
 		findViewById(R.id.button_theme_2).setOnClickListener(this);
+		findViewById(R.id.button_theme_3).setOnClickListener(this);
 		
 		initSkinChoices();
 	}
@@ -90,6 +94,11 @@ public class HomeActivity extends Activity implements OnClickListener {
 			changeLanguage(Locale.ENGLISH);
 			title_textview.setText(R.string.bar_title_night);
 			break;
+			
+		case R.id.button_theme_3:
+			changeSkinWithFiles();
+			title_textview.setText(R.string.bar_title_main);
+			break;
 
 		default:
 			break;
@@ -108,11 +117,29 @@ public class HomeActivity extends Activity implements OnClickListener {
 		onSkinChanged(getApplicationContext());
 	}
 	
+	private void changeSkinWithFiles() {
+		String skinDirectoryPath = "/data/data/com.senseforce.skintest/files/skin/res/"; 
+		ZipUtil zipUtil = new ZipUtil(2049);
+		try {
+			zipUtil.unZip(createPackageContext("com.senseforce.skintest.asset1", Context.CONTEXT_IGNORE_SECURITY), "skin.zip", skinDirectoryPath);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		//TODO It will leak here. fix it!
+		BitmapDrawable bitmapDrawable = new BitmapDrawable(this.getResources(), skinDirectoryPath + "background_img.png");
+		if (bitmapDrawable.getBitmap() == null) {
+			Toast.makeText(this, "The skin may be broken", Toast.LENGTH_SHORT).show();
+		}
+		findViewById(R.id.frame).setBackgroundDrawable(bitmapDrawable);
+		title_textview.setText(this.getString(R.string.app_name));
+		title_textview.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.title_bar_bg));
+	}
+	
 	private void onSkinChanged(Context skinContext) {
 		title_textview.setText(skinContext.getString(R.string.app_name));
 		title_textview.setBackgroundDrawable(skinContext.getResources().getDrawable(R.drawable.title_bar_bg));
 		findViewById(R.id.frame).setBackgroundDrawable(skinContext.getResources().getDrawable(R.drawable.color_gloal_background));
-		Drawable buttonBgDrawable = skinContext.getResources().getDrawable(R.drawable.button_bg_day);
 		View topView = findViewById(R.id.frame);
 		if (topView instanceof ViewGroup) {
 			ViewGroup frame = (ViewGroup)topView;
@@ -120,7 +147,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 			for (int childIndex = 0; childIndex < childrenCount; childIndex++) {
 				View button = frame.getChildAt(childIndex);
 				if (button instanceof Button) {
-					button.setBackgroundDrawable(buttonBgDrawable);
+					button.setBackgroundDrawable(skinContext.getResources().getDrawable(R.drawable.button_bg_day));
 				}
 			}
 		}
@@ -144,4 +171,15 @@ public class HomeActivity extends Activity implements OnClickListener {
 		Matcher matcher = pattern.matcher(packageInfo.packageName);
 		return matcher.find();
 	}
+
+	@Override
+	protected void onDestroy() {
+		findViewById(R.id.button_theme_1).setOnClickListener(null);
+		findViewById(R.id.button_theme_2).setOnClickListener(null);
+		findViewById(R.id.button_theme_3).setOnClickListener(null);
+		
+		super.onDestroy();
+	}
+	
+	
 }

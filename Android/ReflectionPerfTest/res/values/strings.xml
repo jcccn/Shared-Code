@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">"Hello, let's reflect!"</string>
+    <string name="app_name">ReflectTest</string>
+    <string name="button_title_0">取对象的属性</string>
+    <string name="button_title_1">取类的静态属性</string>
+    <string name="button_title_2">执行某对象的方法</string>
+    <string name="button_title_3">执行某类的静态方法</string>
+    <string name="button_title_4">新建实例</string>
+    <string name="button_title_5">判断是否为某个类的实例</string>
+    <string name="button_title_6">得到数组中的某个元素</string>
+
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/display_textview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center_horizontal"
+        android:maxHeight="100dp"
+        android:text="@string/hello" />
+
+    <Button
+        android:id="@+id/button_0"
+        style="@style/Button.Normal"
+        android:text="@string/button_title_0" />
+
+    <Button
+        android:id="@+id/button_1"
+        style="@style/Button.Normal"
+        android:text="@string/button_title_1" />
+
+    <Button
+        android:id="@+id/button_2"
+        style="@style/Button.Normal"
+        android:text="@string/button_title_2" />
+
+    <Button
+        android:id="@+id/button_3"
+        style="@style/Button.Normal"
+        android:text="@string/button_title_3" />
+    
+    <Button
+        android:id="@+id/button_4"
+        style="@style/Button.Normal"
+        android:text="@string/button_title_4" />
+    
+    <Button
+        android:id="@+id/button_5"
+        style="@style/Button.Normal"
+        android:text="@string/button_title_5" />
+    
+    <Button
+        android:id="@+id/button_6"
+        style="@style/Button.Normal"
+        android:text="@string/button_title_6" />
+
+</LinearLayout>

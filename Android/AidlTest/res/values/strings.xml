@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello AIDL!</string>
+    <string name="app_name">AidlTest</string>
+    <string name="button_title_0">bind</string>
+    <string name="button_title_1">put</string>
+    <string name="button_title_2">get</string>
+
+</resources>
